@@ -7,17 +7,21 @@ end
 
 Vector() = Vector(0.0, 0.0)
 
-import Base.+, Base.-, Base.*, Base./
+import Base.+, Base.-, Base.*, Base./, Base.==
 add(a::Vector, b::Vector) = Vector(a.x + b.x, a.y + b.y)
 sub(a::Vector, b::Vector) = Vector(a.x - b.x, a.y - b.y)
 mult(a::Vector, scalar) = Vector(a.x * scalar, a.y * scalar)
 div(a::Vector, scalar) = Vector(a.x / scalar, a.y / scalar)
 neg(v::Vector) = mult(v, -1)
-(+)(a::Vector, b::Vector) = add(b, b)
+(+)(a::Vector, b::Vector) = add(a, b)
 (-)(a::Vector, b::Vector) = sub(a, b)
 (*)(a::Vector, scalar) = mult(a, scalar)
 (/)(a::Vector, scalar) = div(a, scalar)
 (-)(v::Vector) = neg(v)
+function (==)(a::Vector, b::Vector)
+    a.x == b.x && a.y == b.y && return true
+    return false
+end
 
 function add!(a::Vector, b::Vector)
     a.x += b.x
