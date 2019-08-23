@@ -1,7 +1,5 @@
 """Vector geometry."""
 
-# TODO: overload aritmetic operators to handle Vector
-
 mutable struct Vector
     x
     y
@@ -9,21 +7,43 @@ end
 
 Vector() = Vector(0.0, 0.0)
 
+import Base.+, Base.-, Base.*, Base./
+add(a::Vector, b::Vector) = Vector(a.x + b.x, a.y + b.y)
+sub(a::Vector, b::Vector) = Vector(a.x - b.x, a.y - b.y)
+mult(a::Vector, scalar) = Vector(a.x * scalar, a.y * scalar)
+div(a::Vector, scalar) = Vector(a.x / scalar, a.y / scalar)
+neg(v::Vector) = mult(v, -1)
+(+)(a::Vector, b::Vector) = add(b, b)
+(-)(a::Vector, b::Vector) = sub(a, b)
+(*)(a::Vector, scalar) = mult(a, scalar)
+(/)(a::Vector, scalar) = div(a, scalar)
+(-)(v::Vector) = neg(v)
+
+function add!(a::Vector, b::Vector)
+    a.x += b.x
+    a.y += b.y
+    return a
+end
+
+function sub!(a::Vector, b::Vector)
+    a.x -= b.x
+    a.y -= b.y
+    return a
+end
+
+function mult!(v::Vector, scalar)
+    v.x *= scalar
+    v.y *= scalar
+    return v
+end
+
+function div!(v::Vector, scalar)
+    v.x /= scalar
+    v.y /= scalar
+    return v
+end
+
 magnitude(v::Vector) = sqrt(v.x * v.x + v.y * v.y)
-
-norm(v::Vector) = v.x * v.x + v.y * v.y
-
-function rotate!(v::Vector, angle)
-    # TODO
-    # x = v.x * cos(angle) - v.y * sin(angle)
-    # y = v.x * sin(angle) + v.y * cos(angle)
-    # v.x = x
-    # v.y = y
-end
-
-function rotate!(v::Vector, angle, point)
-    # TODO
-end
 
 function normalize!(v::Vector)
     m = magnitude(v)
@@ -34,51 +54,25 @@ function normalize!(v::Vector)
         v.x /= m
         v.y /= m
     end
+    return v
 end
 
-dot(vA::Vector, vB::Vector) = vA.x * vB.x + vA.y * vB.y
+dot(a::Vector, b::Vector) = a.x * b.x + a.y * b.y
+det(a::Vector, b::Vector) = a.x * b.y - a.y * b.x
+cross(v::Vector) = Vector(-v.x, v.y)
 
-cross(vA::Vector, vB::Vector) = vA.x * vB.y - vA.y * vB.x
-
-function cross(vA::Vector, vB::Vector, vC::Vector)
-    # TODO
+# TODO
+function rotate!(v::Vector, angle)
+    # x = v.x * cos(angle) - v.y * sin(angle)
+    # y = v.x * sin(angle) + v.y * cos(angle)
+    # v.x = x
+    # v.y = y
 end
 
-add(vA::Vector, vB::Vector) = Vector(vA.x + vB.x, vA.y + vB.y)
-sub(vA::Vector, vB::Vector) = Vector(vA.x - vB.x, vA.y - vB.y)
-mult(vA::Vector, scalar) = Vector(vA.x * scalar, vA.y * scalar)
-div(vA::Vector, vB::Vector) = Vector(vA.x / scalar, vA.y / scalar)
-
-function add!(vA::Vector, vB::Vector)
-    vA.x += vB.x
-    vA.y += vB.y
+# TODO
+function rotate!(v::Vector, angle, point)
 end
 
-function sub!(vA::Vector, vB::Vector)
-    vA.x -= vB.x
-    vA.y -= vB.y
-end
-
-function mult!(vA::Vector, scalar)
-    vA.x *= scalar
-    vA.y *= scalar
-end
-
-function div!(vA::Vector, vB::Vector)
-    vA.x /= scalar
-    vA.y /= scalar
-end
-
-neg(v::Vector) = mult(v, -1)
-
+# TODO
 function angle(v::Vector)
-    # TODO
-end
-
-function perp(v::Vector, opposite::Bool = False)
-    if opposite
-        return Vector(v.y, -v.x)
-    else
-        return Vector(-v.y, v.x)
-    end
 end
