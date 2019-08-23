@@ -1,7 +1,11 @@
 module Matter
 
-include("./geometry/vector.jl")
+include("./vector.jl")
 
 export Vector
+
+include("./particle.jl")
+
+export Particle
 
 end # module
