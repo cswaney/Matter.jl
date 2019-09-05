@@ -1,3 +1,3 @@
 # Matter.jl
 
-A 2D Physics engine written in Julia.
+A 2D physics engine written in Julia [**under construction**].
