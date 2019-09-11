@@ -1,0 +1,7 @@
+name = "Matter"
+uuid = "0b205bf8-c5ac-11e9-2dd4-2f9b9e7c7c14"
+authors = ["katabaticwind <fastman@fastmail.com>"]
+version = "0.1.0"
+
+[deps]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"

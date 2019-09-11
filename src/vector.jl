@@ -65,14 +65,18 @@ dot(a::Vector, b::Vector) = a.x * b.x + a.y * b.y
 det(a::Vector, b::Vector) = a.x * b.y - a.y * b.x
 cross(v::Vector) = Vector(-v.x, v.y)
 
+# TODO
 function rotate!(v::Vector, angle)
-    # TODO
     # x = v.x * cos(angle) - v.y * sin(angle)
     # y = v.x * sin(angle) + v.y * cos(angle)
     # v.x = x
     # v.y = y
 end
 
+# TODO
 function rotate!(v::Vector, angle, point)
-    # TODO
+end
+
+# TODO
+function angle(v::Vector)
 end
