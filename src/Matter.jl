@@ -1,11 +1,7 @@
 module Matter
 
-include("./vector.jl")
+include("./geometry/vector.jl")
 
-export Vector
-
-include("./particle.jl")
-
-export Particle
+export Vector, add!, sub!, mult!, div!, magnitude, normalize!, dot, det, cross, rotate!
 
 end # module
