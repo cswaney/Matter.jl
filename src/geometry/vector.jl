@@ -65,15 +65,6 @@ dot(a::Vector, b::Vector) = a.x * b.x + a.y * b.y
 det(a::Vector, b::Vector) = a.x * b.y - a.y * b.x
 cross(v::Vector) = Vector(-v.x, v.y)
 
-function rotate!(v::Vector, angle)
-    angle == 0. && return
-    dx = v.x
-    dy = v.y
-    v.x = dx * cos(angle) - dy * sin(angle)
-    v.y = dx * sin(angle) + dy * cos(angle)
-    return v
-end
-
 function rotate!(v::Vector, angle, point)
     angle == 0. && return
     dx = v.x - point.x
@@ -81,4 +72,12 @@ function rotate!(v::Vector, angle, point)
     v.x = point.x + (dx * cos(angle) - dy * sin(angle))
     v.y = point.y + (dx * sin(angle) + dy * cos(angle))
     return v
+end
+
+rotate!(v::Vector, angle) = rotate!(v, angle, Vector(0., 0.))
+
+import Base.isapprox
+function isapprox(a::Vector, b::Vector; atol = 1e-16)
+    isapprox(a.x, b.x; atol = atol) && isapprox(a.y, b.y; atol = atol) && return true
+    return false
 end

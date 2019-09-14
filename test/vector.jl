@@ -31,4 +31,10 @@ end
     @test det(a, b) == 0.
     @test magnitude(a) == 1.
     @test normalize!(a) == Vector(0., 1.)
+    a = Vector(1., 0.)
+    rotate!(a, π / 2)
+    @test isapprox(a, Vector(0., 1.))
+    a = Vector(2., 0.)
+    rotate!(a, π / 2, Vector(1., 0.))
+    @test isapprox(a, Vector(1., 1.))
 end
