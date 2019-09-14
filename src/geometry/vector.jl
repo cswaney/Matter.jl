@@ -66,13 +66,19 @@ det(a::Vector, b::Vector) = a.x * b.y - a.y * b.x
 cross(v::Vector) = Vector(-v.x, v.y)
 
 function rotate!(v::Vector, angle)
-    # TODO
-    # x = v.x * cos(angle) - v.y * sin(angle)
-    # y = v.x * sin(angle) + v.y * cos(angle)
-    # v.x = x
-    # v.y = y
+    angle == 0. && return
+    dx = v.x
+    dy = v.y
+    v.x = dx * cos(angle) - dy * sin(angle)
+    v.y = dx * sin(angle) + dy * cos(angle)
+    return v
 end
 
 function rotate!(v::Vector, angle, point)
-    # TODO
+    angle == 0. && return
+    dx = v.x - point.x
+    dy = v.y - point.y
+    v.x = point.x + (dx * cos(angle) - dy * sin(angle))
+    v.y = point.y + (dx * sin(angle) + dy * cos(angle))
+    return v
 end
